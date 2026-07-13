@@ -1,0 +1,202 @@
+HOW TO CHANGE WHATSAPP SENDER NUMBER
+Complete Guide - Delete Old & Connect New WhatsApp
+📌 WHAT THIS DOES
+Action	Description
+Deletes	Old WhatsApp session files
+Removes	Previous number connection
+Allows	New QR code scan with different number
+Requires	No code changes
+🔧 ALL COMMANDS WITH COMMENTS
+STEP 1: Stop the Bridge
+powershell
+# Go to terminal where node server.js is running
+# Press these keys together:
+Ctrl + C
+
+# This stops the WhatsApp bridge service
+STEP 2: Navigate to Project Folder
+powershell
+# Change directory to your SMS folder
+cd C:\StudentManagementSystem\sms
+
+# Comment: This is where your WhatsApp bridge files are located
+STEP 3: Delete Old WhatsApp Session
+powershell
+# Delete the main session folder (where WhatsApp login is stored)
+Remove-Item -Path "whatsapp-session" -Recurse -Force -ErrorAction SilentlyContinue
+
+# Comment: This removes the saved WhatsApp login from old number
+powershell
+# Delete backup/auth folder (if exists)
+Remove-Item -Path ".wwebjs_auth" -Recurse -Force -ErrorAction SilentlyContinue
+
+# Comment: This removes any remaining authentication files
+STEP 4: Verify Deletion (Optional)
+powershell
+# Check if folders are gone
+dir whatsapp-session -ErrorAction SilentlyContinue
+
+# Comment: If nothing shows, deletion was successful
+STEP 5: Restart WhatsApp Bridge
+powershell
+# Start the bridge with clean session
+node server.js
+
+# Comment: This will generate a NEW QR code for scanning
+STEP 6: Connect New WhatsApp Number
+powershell
+# After QR code appears in terminal:
+
+# 1. Open WhatsApp on your NEW phone number
+# 2. Tap Settings (3 dots or gear icon)
+# 3. Tap Linked Devices
+# 4. Tap Link a Device
+# 5. Scan the QR code from terminal
+
+# Comment: The number that scans becomes the new sender
+STEP 7: Verify Connection
+powershell
+# Open browser and go to:
+http://localhost:3001/status
+
+# Expected response:
+# {"connected":true,"qr":null}
+
+# Comment: "connected":true means new number is active
+🚀 ONE-LINE RESET COMMAND (COPY-PASTE READY)
+powershell
+cd C:\StudentManagementSystem\sms; Remove-Item -Path "whatsapp-session" -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Path ".wwebjs_auth" -Recurse -Force -ErrorAction SilentlyContinue; Write-Host "✅ Old WhatsApp deleted! Now run: node server.js" -ForegroundColor Green
+After running above, start bridge:
+
+powershell
+node server.js
+📋 COMPLETE SEQUENCE (Copy All)
+powershell
+# ============================================
+# STEP 1: Stop the bridge (press Ctrl+C manually)
+# ============================================
+
+# ============================================
+# STEP 2: Run these commands in order
+# ============================================
+
+# Go to project folder
+cd C:\StudentManagementSystem\sms
+
+# Delete old session - Main folder
+Remove-Item -Path "whatsapp-session" -Recurse -Force -ErrorAction SilentlyContinue
+
+# Delete old session - Backup folder
+Remove-Item -Path ".wwebjs_auth" -Recurse -Force -ErrorAction SilentlyContinue
+
+# Confirm deletion (optional)
+Write-Host "✅ Old WhatsApp session deleted!" -ForegroundColor Green
+
+# ============================================
+# STEP 3: Start fresh bridge
+# ============================================
+
+# Start WhatsApp bridge
+node server.js
+
+# ============================================
+# STEP 4: Scan QR code with NEW WhatsApp number
+# ============================================
+
+# After QR appears, scan with your new number
+# Wait for: "✅ WHATSAPP CONNECTED SUCCESSFULLY!"
+
+# ============================================
+# STEP 5: Test connection
+# ============================================
+
+# Open browser: http://localhost:3001/status
+# Should show: {"connected":true}
+🔍 TROUBLESHOOTING COMMANDS
+Check if bridge is running
+powershell
+# In browser or run:
+curl http://localhost:3001/status
+
+# Comment: If connection refused, bridge is not running
+Force kill stuck processes
+powershell
+# Kill all Node processes
+taskkill /F /IM node.exe
+
+# Kill all Chrome processes  
+taskkill /F /IM chrome.exe
+
+# Comment: Use if bridge won't stop or restart properly
+Check what's on port 3001
+powershell
+# See which process is using port 3001
+netstat -ano | findstr :3001
+
+# Comment: Shows PID of process on port 3001
+Delete session if permission denied
+powershell
+# Force delete with different method
+rm -r -force whatsapp-session -ErrorAction SilentlyContinue
+rm -r -force .wwebjs_auth -ErrorAction SilentlyContinue
+
+# Comment: Alternative deletion command
+✅ SUCCESS INDICATORS
+Terminal Shows:
+text
+🚀 WhatsApp Bridge on port 3001
+✅✅✅ WHATSAPP CONNECTED SUCCESSFULLY! ✅✅✅
+Browser Shows:
+json
+{"connected":true,"qr":null}
+Flask Shows (when sending message):
+text
+🔔 Sending absence alert for: Student Name
+✅ Parent WhatsApp sent to 91XXXXXXXXXX
+✅ Student WhatsApp sent to 91XXXXXXXXXX
+⚠️ IMPORTANT NOTES
+Command	What It Does	When To Use
+Ctrl + C	Stops bridge	Before deleting session
+Remove-Item -Path "whatsapp-session" -Recurse -Force	Deletes login	To switch numbers
+node server.js	Starts bridge	After deletion
+taskkill /F /IM node.exe	Kills Node	If stuck
+🔄 TO SWITCH BACK TO OLD NUMBER
+powershell
+# Same steps as above - just scan with old number instead
+cd C:\StudentManagementSystem\sms
+Remove-Item -Path "whatsapp-session" -Recurse -Force
+node server.js
+# Scan QR with old WhatsApp number
+
+
+
+
+
+
+
+
+
+all time running 
+cd C:\StudentManagementSystem\sms
+pm2 resurrect
+
+
+o Make Them Start AUTOMATICALLY on Windows:
+Option 1: Create a Startup Script (Easiest)
+Step 1: Create a file start-pm2.bat on your Desktop:
+
+batch
+@echo off
+cd C:\StudentManagementSystem\sms
+C:\Users\HP1\AppData\Roaming\npm\pm2 resurrect
+Step 2: Press Win + R, type shell:startup, press Enter
+
+Step 3: Copy start-pm2.bat to this folder
+
+
+impt 
+Now after every computer restart, services will start automatically!
+
+cd C:\StudentManagementSystem\sms
+pm2 resurrect
+pm2 status

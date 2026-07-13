@@ -1,0 +1,35 @@
+# ============================================================
+# STUDENT MANAGEMENT SYSTEM - COMPLETE DEPENDENCIES
+# ============================================================
+
+# Core Web Framework
+Flask==2.3.3
+
+# Database ORM
+Flask-SQLAlchemy==3.1.1
+PyMySQL==1.1.1
+
+# Authentication (Session-based)
+Flask-Login==0.6.2
+bcrypt==4.1.2
+
+# Cross-Origin Resource Sharing
+Flask-CORS==4.0.1
+
+# Environment Variables
+python-dotenv==1.0.1
+
+# HTTP Requests (for WhatsApp API calls)
+requests==2.31.0
+
+# REAL-TIME WEBSOCKET (NEW)
+flask-socketio==5.3.4
+eventlet==0.33.3
+python-engineio==4.7.1
+python-socketio==5.10.0
+
+# Production Server
+gunicorn==21.2.0
+
+# Optional - For SMS fallback
+# twilio==8.10.0

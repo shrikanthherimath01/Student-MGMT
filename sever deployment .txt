@@ -1,0 +1,76 @@
+On Your Server (Linux/Ubuntu):
+Step 1: Upload your project to server
+bash
+# Copy your project to server
+scp -r C:\StudentManagementSystem\sms user@your-server-ip:/home/user/
+Step 2: SSH into your server
+bash
+ssh user@your-server-ip
+cd /home/user/sms
+Step 3: Install PM2 (Process Manager)
+bash
+npm install -g pm2
+Step 4: Start both services with PM2
+bash
+# Start WhatsApp bridge
+pm2 start server.js --name whatsapp-bridge
+
+# Start Flask app
+pm2 start "python3 app.py" --name flask-app
+Step 5: Save PM2 configuration
+bash
+pm2 save
+Step 6: Enable auto-start on server boot
+bash
+pm2 startup
+Copy and run the command it gives you.
+
+After Setup:
+Action	Command
+Check status	pm2 status
+View logs	pm2 logs
+Restart all	pm2 restart all
+Stop all	pm2 stop all
+One More Thing - Use Production Server for Flask
+Instead of app.run(), use Gunicorn:
+bash
+# Install gunicorn
+pip install gunicorn
+
+# Run with PM2
+pm2 start "gunicorn -w 4 -b 0.0.0.0:5000 app:app" --name flask-app
+Complete Setup Commands (Copy-Paste):
+bash
+# On your server
+cd /home/user/sms
+
+# Install dependencies
+npm install
+pip install -r requirements.txt
+
+# Start with PM2
+pm2 start server.js --name whatsapp-bridge
+pm2 start "gunicorn -w 4 -b 0.0.0.0:5000 app:app" --name flask-app
+
+# Save and enable auto-start
+pm2 save
+pm2 startup
+Now your server will:
+✅ Start automatically when server boots
+
+✅ Keep both services running 24/7
+
+✅ Restart automatically if they crash
+
+✅ No manual terminals needed
+
+Access from anywhere:
+text
+http://your-server-ip:5000
+To Update your code on server:
+bash
+# Upload new files from your PC
+scp -r C:\StudentManagementSystem\sms\* user@your-server-ip:/home/user/sms/
+
+# On server, restart
+pm2 restart all

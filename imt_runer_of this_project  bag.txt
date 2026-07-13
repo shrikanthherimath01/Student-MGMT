@@ -1,0 +1,25 @@
+COMPLETE PM2 COMMANDS GUIDE - ONE PAGE
+1. START SERVICES (For Daily Use)
+Run for TODAY only (normal terminal):
+powershell
+cd C:\StudentManagementSystem\sms
+node server.js
+(Keep terminal open, Ctrl+C to stop)
+
+powershell
+cd C:\StudentManagementSystem\sms
+venv\Scripts\activate
+python app.py
+(Keep terminal open, Ctrl+C to stop)
+
+2. START SERVICES WITH PM2 (Run in Background)
+First time setup:
+powershell
+cd C:\StudentManagementSystem\sms
+pm2 start server.js --name whatsapp-bridge
+pm2 start "venv\Scripts\python.exe" --name flask-app -- app.py
+pm2 save
+After computer restart:
+powershell
+cd C:\StudentManagementSystem\sms
+pm2 resurrect

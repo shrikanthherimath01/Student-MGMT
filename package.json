@@ -1,0 +1,35 @@
+{
+  "name": "whatsapp-bridge",
+  "version": "1.0.0",
+  "description": "WhatsApp Bridge for School Management System",
+  "main": "whatsapp_bridge.js",
+  "scripts": {
+    "start": "node whatsapp_bridge.js",
+    "dev": "nodemon whatsapp_bridge.js",
+    "pm2": "pm2 start whatsapp_bridge.js --name whatsapp-bridge",
+    "pm2-stop": "pm2 stop whatsapp-bridge",
+    "pm2-restart": "pm2 restart whatsapp-bridge",
+    "pm2-logs": "pm2 logs whatsapp-bridge"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.9",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.6",
+    "express": "^4.22.1",
+    "puppeteer-core": "^24.42.0",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.34.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "whatsapp",
+    "bridge",
+    "school",
+    "management",
+    "baileys"
+  ],
+  "author": "SchoolMS",
+  "license": "MIT"
+}
